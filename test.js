@@ -1,0 +1,3 @@
+var myfunc=function(){
+    
+};
