@@ -91,6 +91,7 @@
 (setq-default cursor-type 'bar)
 ;;禁止生成备份文件
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 ;;org模式下语法el高亮
 (require 'org)
 (setq org-src-fontify-natively t)
