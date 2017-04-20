@@ -1,15 +1,13 @@
 ;; cl - Common Lisp Extension
- (require 'cl)
+(require 'cl)
 
 (when (>= emacs-major-version 24)
-     (require 'package)
-     (package-initialize)
      (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 		      ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 
 ;; 注意 elpa.emacs-china.org 是
 ;; Add Packages
- (defvar my/packages '(
+ (defvar dongchunming/packages '(
 		;; --- Auto-completion ---
 		company
 		;; --- Better Editor ---
@@ -28,14 +26,14 @@
 		popwin
 		) "Default packages")
 
- (setq package-selected-packages my/packages)
+ (setq package-selected-packages dongchunming/packages)
 
- (defun my/packages-installed-p ()
-     (loop for pkg in my/packages
+ (defun dongchunming/packages-installed-p ()
+     (loop for pkg in dongchunming/packages
 	   when (not (package-installed-p pkg)) do (return nil)
 	   finally (return t)))
 
- (unless (my/packages-installed-p)
+ (unless (dongchunming/packages-installed-p)
      (message "%s" "Refreshing package database...")
      (package-refresh-contents)
      (dolist (pkg my/packages)
@@ -47,7 +45,6 @@
 (global-hungry-delete-mode)
 
 ;;配置智能括号匹配
-(require 'smartparens-config)
 ;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 
