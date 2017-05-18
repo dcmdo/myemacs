@@ -36,7 +36,7 @@
  (unless (dongchunming/packages-installed-p)
      (message "%s" "Refreshing package database...")
      (package-refresh-contents)
-     (dolist (pkg my/packages)
+     (dolist (pkg dongchunming/packages)
        (when (not (package-installed-p pkg))
 	 (package-install pkg))))
 
