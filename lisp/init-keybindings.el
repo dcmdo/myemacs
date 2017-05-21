@@ -13,7 +13,13 @@
 
 ;;f2打开配置文件
 (global-set-key (kbd "<f2>") 'open-my-init-file)
-
+;;f3打开快捷键绑定配置文件
+(global-set-key (kbd "<f3>") 'open-my-init-keybindings)
 
 (global-set-key (kbd "C-c p f") 'counsel-git)
+;;缩进
+(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
+;;补全
+(global-set-key (kbd "s-/") 'hippie-expand)
+
 (provide 'init-keybindings)
