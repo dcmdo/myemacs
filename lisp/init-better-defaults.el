@@ -29,6 +29,12 @@
 ;;删除选中编辑模式
 (delete-selection-mode t)
 
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  (cond ((looking-at-p "\\s(") (funcall fn))
+		(t (save-excursion
+			 (ignore-errors (backward-up-list))
+			 (funcall fn)))))
+
 ;;匹配括号
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
@@ -74,7 +80,15 @@
 (setq dired-dwim-target t)
 
 
+(defun hidden-dos-eol()
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
 
+(defun remove-dos-eol()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t)(replace-match "")))
 
 
 (provide 'init-better-defaults.el)
