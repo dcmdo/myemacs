@@ -17,6 +17,8 @@
 		smartparens
 		;; --- Major Mode ---
 		js2-mode
+		js2-refactor
+		expand-region
 		;; --- Minor Mode ---
 		nodejs-repl
 		;;exec-path-from-shell
@@ -25,6 +27,17 @@
 		;; solarized-theme
 		popwin
 		web-mode
+		iedit
+		org-pomodoro
+		helm-ag
+		flycheck
+		auto-yasnippet
+		evil
+		evil-leader
+		window-numbering
+		evil-surround
+		evil-nerd-commenter
+		which-key
 		) "Default packages")
 
  (setq package-selected-packages dongchunming/packages)
@@ -96,6 +109,27 @@
 
   (setq indent-tabs-mode nil))
 
-(global-set-key (kbd "C-c t i") 'my-toggle-web-indent)
+
+
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(add-hook 'js2-mode-hook 'flycheck-mode)
+
+
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+(evil-mode 1)
+(setcdr evil-insert-state-map nil)
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
+
+(global-evil-leader-mode)
+
+(window-numbering-mode)
+
+
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+(evilnc-default-hotkeys)
 
 (provide 'init-packages)

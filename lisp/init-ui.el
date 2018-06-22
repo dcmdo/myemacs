@@ -8,6 +8,6 @@
 ;;显示当前行
 (global-hl-line-mode t)
 ;;打开时窗口最大化
-;;(setq initial-frame-alist(quote((fullscreen . maximized))))
+(setq initial-frame-alist(quote((fullscreen . maximized))))
 
 (provide 'init-ui)

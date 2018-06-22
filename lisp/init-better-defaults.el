@@ -1,6 +1,8 @@
 (setq ring-bell-function 'ignore);;禁止声音
 (global-linum-mode t);;全局行号显示
 (global-auto-revert-mode t)
+;;改变光标样式
+(setq-default cursor-type 'bar)
 ;;缩写替换
 (abbrev-mode t)
 (define-abbrev-table 'global-abbrev-table '(
@@ -11,6 +13,8 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
+;;设置字体
+(set-default-font "宋体")
 
 ;; 设置缩进
 (setq c-basic-offset 4)
@@ -66,7 +70,7 @@
 										 try-complete-lisp-symbol))
 
 (fset 'yes-or-no-p' 'y-or-n-p)
-
+(setq dired-deletion-confirmer #'y-or-n-p)
 
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
@@ -79,16 +83,30 @@
 
 (setq dired-dwim-target t)
 
-
+;;隐藏dos换行符
 (defun hidden-dos-eol()
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
-
+;;移出dos换行符
 (defun remove-dos-eol()
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
+
+(defun occur-dwin()
+  (interactive)
+  (push (if (region-active-p)
+			(buffer-substring-no-properties
+			 (region-beginning)
+			 (region-end))
+		  (let ((sym (thing-at-point 'symbol)))
+			(when (stringp sym)
+			  (regexp-quote sym))))
+		regexp-history)
+  (call-interactively 'occur))
+
+;;(set-language-environment "UTF-8")
 
 
 (provide 'init-better-defaults.el)
